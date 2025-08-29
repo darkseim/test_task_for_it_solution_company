@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Топ 10 цитат{% endblock %}
+
+{% block content %}
+<h1 class="mb-4 text-center">Топ 10 цитат по лайкам</h1>
+
+{% if quotes %}
+    <div class="row">
+        {% for quote in quotes %}
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm p-4 bg-white rounded h-100">
+            <div class="mb-2 fw-bold fs-5">#{{ forloop.counter }}</div>
+            <blockquote class="blockquote mb-3">
+                <p class="fs-5 fst-italic">“{{ quote.text }}”</p>
+                <footer class="blockquote-footer mt-2"> {{ quote.author }}</footer>
+            </blockquote>
+            <div class="d-flex justify-content-between mt-3">
+                <span>👍 {{ quote.likes }}</span>
+                <span>👁️ {{ quote.views }}</span>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+    </div>
+{% else %}
+    <div class="alert alert-info text-center">
+        Цитат пока нет.
+    </div>
+{% endif %}
+
+<div class="text-center mt-4">
+    <a href="{% url 'quotes:index' %}" class="btn btn-primary">Вернуться на главную</a>
+</div>
+{% endblock %}
